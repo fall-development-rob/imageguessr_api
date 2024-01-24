@@ -11,13 +11,15 @@ import random
 
 import string
 
-from api.lib import connections_manager as manager
+from api.lib.connections_manager import ConnectionManager
 
 router = APIRouter(
     prefix="/game",
     tags=["game"],
     responses={404: {"description": "Not found"}},
 )
+
+manager = ConnectionManager()
 
 @router.get("/new", response_model=Game.NewGame)
 async def new_game():
@@ -54,15 +56,4 @@ async def roles_allocation(websocket, id):
         role['role'] = 'guesser'
 
     await websocket.send_text(json.dumps(role))
-
-
-# @router.websocket("/ws")
-# async def websocket_endpoint(websocket: WebSocket, id: str = Query(...)):
-#     await manager.connect(websocket, id)
-#     try:
-#         while True:
-#             data = await websocket.receive_text()
-#             await sockets_instance.handle_message(data, websocket, id)
-#     except WebSocketDisconnect:
-#         manager.disconnect(websocket, id)
 
