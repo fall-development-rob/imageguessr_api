@@ -37,7 +37,7 @@ async def generate_async(prompt: str) -> str:
         f"{STABLE_HORDE_URL}/generate/async", json=payload, headers=headers
     )
     data = r.json()
-
+    print(data)
     return data["id"]
 
 
