@@ -1,3 +1,7 @@
+The server will run on: http://localhost:8000
+
+Swagger docs for the API can be found at: http://localhost:8000/docs
+
 To start the python sever run:
 
 ``` 
